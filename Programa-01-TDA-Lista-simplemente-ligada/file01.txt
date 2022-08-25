@@ -1,0 +1,1 @@
+pedro|5|1*juan|4|0*massimo|3|0*pablo|1|1*ricardo|2|1*

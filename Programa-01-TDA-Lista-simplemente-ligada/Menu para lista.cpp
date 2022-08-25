@@ -30,6 +30,8 @@ void menu()
         cout << "5. Eliminar elemento\n";
         cout << "6. Vaciar lista\n";
         cout << "7. Mostrar tamano lista\n";
+        cout << "8. Guardar datos en archivo\n";
+        cout << "9. Cargar datos de archivo\n"; 
         cout << "0. Salir\n\n";
         cin >> opc;
         switch (opc)
@@ -97,6 +99,12 @@ void menu()
             break;
         case 7:
             lista->tamanoLista();
+            break;
+        case 8:
+            lista->guardarDatos();
+            break;
+        case 9:
+            lista->cargarDatos();
             break;
         case 0:
             cout << "Gracias por su preferencia\n";

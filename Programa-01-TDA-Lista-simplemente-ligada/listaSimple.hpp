@@ -3,6 +3,9 @@
 #include <iostream>
 #include <conio.h>
 #include <cstdlib>
+#include <fstream>
+#include <sstream>
+#include <string>
 #include "nodo.hpp"
 #include "alumno.hpp"
 #pragma once
@@ -23,6 +26,8 @@ public:
     void buscarElemento(int);
     void eliminarElemento(int);
     void eliminarLista();
+    void guardarDatos();
+    void cargarDatos();
 
 private:
 };
@@ -188,6 +193,55 @@ void listaSimple::eliminarLista()
     cout << "La lista ha sido vaciada\n";
     t = nullptr;
     h = nullptr;
+}
+
+void listaSimple::guardarDatos()
+{
+    nodo *actual = new nodo();
+    actual = h;
+    ofstream archivoLista;
+    archivoLista.open("file01.txt", ios::out);
+    if (archivoLista.fail()) // True/false, si hubo error se da mensaje
+    {
+        cout << "No se pudo abrir el archivo";
+        exit(1); // Salir del programa
+    }
+    while (actual != nullptr)
+    {
+        archivoLista << actual->dato.getNombre() << "|";
+        archivoLista << actual->dato.getId() << "|";
+        archivoLista << actual->dato.getActivo() << "*";
+        actual = actual->sig;
+    }
+    archivoLista.close();
+}
+
+void listaSimple::cargarDatos()
+{
+    string cadena, registro, campo;
+    nodo *actual = new nodo();
+    actual = h;
+    ifstream archivoLista;
+    archivoLista.open("file01.txt", ios::in);
+    if (archivoLista.fail()) 
+    {
+        cout << "No se pudo abrir el archivo\n";
+        exit(1);
+    }
+    while (!archivoLista.eof()) // Mientras no sea el end of file
+    {
+        getline(archivoLista, cadena); // Copiar todo lo que encontremos en archivo a cadena
+        cout<<cadena<<endl;
+    }
+    stringstream cadenaStream(cadena);
+    while (getline(cadenaStream, registro, '*'))
+    {
+        stringstream registroStream(registro);
+        while (getline(registroStream, campo, '|'))
+        {
+            cout<<"Campo: "<<campo<<endl;
+        }
+    }
 }
 
 #endif
