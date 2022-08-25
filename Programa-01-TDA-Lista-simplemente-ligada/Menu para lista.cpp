@@ -1,22 +1,24 @@
 #include <iostream>
-#include "listaSimple.hpp"
-
+#include <cstdlib>
+#include "alumno.hpp"
+#include "listaSimple.hpp" //!No compila con la lista
 using namespace std;
 
 void menu();
-listaSimple *lista = new listaSimple(); //?Crea una nueva lista
+listaSimple *lista = new listaSimple();
+alumno aluTemp;
+
 
 int main()
 {
     menu();
-    system("PAUSE");
     return 0;
 }
 
 void menu()
 {
-    int opc = 1;
-    string dato;
+    int opc = 1, auxInt;
+    string auxString;
     while (opc != 0)
     {
         system("cls");
@@ -33,30 +35,65 @@ void menu()
         switch (opc)
         {
         case 1:
-            cout << "Ingrese un dato: ";
-            cin >> dato;
-            lista->insertaInicio(dato);
+            cout << "Ingrese el nombre del alumno: ";
+            cin>>auxString;
+            aluTemp.setNombre(auxString);
+            cout<<"El alumno esta activo?\n  1)Si  2)No\n";
+            cin>>auxInt;
+            if (auxInt == 1)
+            {
+                aluTemp.setActivo(true);
+            }
+            else if (auxInt == 2)
+            {
+                aluTemp.setActivo(false);
+            }
+            else
+            {
+                cout<<"Opcion invalida\n";
+                break;
+            }
+            lista->insertaInicio(aluTemp);
             break;
+        
         case 2:
-            cout << "Ingrese un dato: ";
-            cin >> dato;
-            lista->insertarFinal(dato);
+            cout << "Ingrese el nombre del alumno: ";
+            cin>>auxString;
+            aluTemp.setNombre(auxString);
+            cout<<"El alumno esta activo?\n  1)Si  2)No\n";
+            cin>>auxInt;
+            if (auxInt == 1)
+            {
+                aluTemp.setActivo(true);
+            }
+            else if (auxInt == 2)
+            {
+                aluTemp.setActivo(false);
+            }
+            else
+            {
+                cout<<"Opcion invalida\n";
+                break;
+            }
+            lista->insertarFinal(aluTemp);
             break;
         case 3:
             lista->mostrarLista();
             break;
+        
         case 4:
-            cout << "Ingrese el elemento a buscar: ";
-            cin >> dato;
-            lista->buscarElemento(dato);
+            cout << "Ingrese el ID del alumno a buscar: ";
+            cin >> auxInt;
+            lista->buscarElemento(auxInt);
             break;
+        
         case 5:
-            cout << "Ingrese el elemento a eliminar: ";
-            cin >> dato;
-            lista->eliminarElemento(dato);
+            cout << "Ingrese el ID del alumno a eliminar: ";
+            cin >> auxInt;
+            lista->eliminarElemento(auxInt);
             break;
         case 6:
-            lista->eliminarLista(dato);
+            lista->eliminarLista();
             break;
         case 7:
             lista->tamanoLista();
