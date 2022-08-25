@@ -28,10 +28,10 @@ public:
     void eliminarLista();
     void guardarDatos();
     void cargarDatos();
+    void eliminarDatos();
 
 private:
 };
-int ID = 0;
 
 listaSimple::listaSimple()
 {
@@ -57,8 +57,6 @@ void listaSimple::insertaInicio(alumno n)
     {
         t = nuevo_nodo; // Apuntar t al final
     }
-    ID++;
-    h->dato.setId(ID);
 }
 void listaSimple::insertarFinal(alumno n)
 {
@@ -78,8 +76,6 @@ void listaSimple::insertarFinal(alumno n)
     aux2->sig = nuevo_nodo;
     nuevo_nodo->sig = aux1; // Asignar el puntero del nuevo nodo el siguiente nod
     t = nuevo_nodo;
-    ID++;
-    nuevo_nodo->dato.setId(ID);
 }
 
 void listaSimple::mostrarLista()
@@ -214,34 +210,58 @@ void listaSimple::guardarDatos()
         actual = actual->sig;
     }
     archivoLista.close();
+    cout<<"Los datos han sido guardados exitosamente"<<endl;
 }
 
 void listaSimple::cargarDatos()
 {
     string cadena, registro, campo;
-    nodo *actual = new nodo();
-    actual = h;
+    int aux = 1;
+    alumno aluAux;
     ifstream archivoLista;
     archivoLista.open("file01.txt", ios::in);
-    if (archivoLista.fail()) 
+    if (archivoLista.fail())
     {
         cout << "No se pudo abrir el archivo\n";
         exit(1);
     }
     while (!archivoLista.eof()) // Mientras no sea el end of file
     {
-        getline(archivoLista, cadena); // Copiar todo lo que encontremos en archivo a cadena
-        cout<<cadena<<endl;
+        getline(archivoLista, cadena);
     }
     stringstream cadenaStream(cadena);
     while (getline(cadenaStream, registro, '*'))
     {
+        aux = 1;
         stringstream registroStream(registro);
         while (getline(registroStream, campo, '|'))
         {
-            cout<<"Campo: "<<campo<<endl;
+            switch (aux)
+            {
+            case 1:
+                aluAux.setNombre(campo);
+                break;
+            case 2:
+                aluAux.setId(stoi(campo));
+                break;
+            case 3:
+                aluAux.setActivo(stoi(campo));
+                break;
+            default:
+                break;
+            }
+            aux++;
         }
+        insertarFinal(aluAux);
     }
+    cout<<"Los datos han sido cargados exitosamente"<<endl;
+    archivoLista.close();
 }
 
+void listaSimple::eliminarDatos()
+{
+    ofstream archivoLista;
+    archivoLista.open("file01.txt", std::ofstream::out | std::ofstream::trunc);
+    cout<<"Los datos guardados han sido eliminados"<<endl;
+}
 #endif
