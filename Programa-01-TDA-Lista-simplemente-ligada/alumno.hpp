@@ -10,7 +10,13 @@ class alumno
 {
 public:
     alumno();
-    alumno(int, string, bool);
+    int getId();
+    void setId(int);
+    string getNombre();
+    void setNombre(string);
+    bool getActivo();
+    void setActivo(bool);
+
 private:
     int id;
     string nombre;
@@ -23,10 +29,28 @@ alumno::alumno()
     nombre = "";
     activo = false;
 }
-alumno::alumno(int idAl, string nombreAl, bool activoAl)
+int alumno::getId()
+{
+    return id;
+}
+void alumno::setId(int idAl)
 {
     id = idAl;
+}
+string alumno::getNombre()
+{
+    return nombre;
+}
+void alumno::setNombre(string nombreAl)
+{
     nombre = nombreAl;
+}
+bool alumno::getActivo()
+{
+    return activo;
+}
+void alumno::setActivo(bool activoAl)
+{
     activo = activoAl;
 }
 #endif
