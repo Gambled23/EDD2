@@ -12,6 +12,8 @@
 
 using namespace std;
 
+int ID = 1;
+
 class listaSimple
 {
 public:
@@ -266,6 +268,10 @@ void listaSimple::cargarDatos()
                     aluAux.setNombre(campo);
                     break;
                 case 2:
+                    if (ID < stoi(campo))
+                    {
+                        ID = stoi(campo) + 1;
+                    }
                     aluAux.setId(stoi(campo));
                     break;
                 case 3:

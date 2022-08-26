@@ -7,7 +7,6 @@ using namespace std;
 void menu();
 listaSimple *lista = new listaSimple();
 alumno aluTemp;
-int ID = 1;
 int main()
 {
     menu();
