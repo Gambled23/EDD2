@@ -226,13 +226,13 @@ void listaSimple::cargarDatos()
         switch (opc)
         {
         case 1:
-            cout<<"Borrando datos...\n";
+            cout << "Borrando datos...\n";
             eliminarLista();
-            cout<<"Cargando datos...\n";
+            cout << "Cargando datos...\n";
             cargarDatos();
             break;
         case 2:
-            cout<<"Volviendo al menu principal...\n";
+            cout << "Volviendo al menu principal...\n";
             break;
         default:
             cout << "Opcion incorrecta\n";
@@ -291,9 +291,20 @@ void listaSimple::cargarDatos()
 
 void listaSimple::eliminarDatos()
 {
-    ofstream archivoLista;
-    archivoLista.open("file01.txt", std::ofstream::out | std::ofstream::trunc);
-    cout << "Los datos guardados han sido eliminados" << endl;
-    archivoLista.close();
+    int opc = 2;
+    cout << "Esta accion es irreversible y borrara todos los datos de respaldo, seguro que quieres continuar?\n";
+    cout << "   1)Si  2)No\n";
+    cin >> opc;
+    if (opc == 1)
+    {
+        ofstream archivoLista;
+        archivoLista.open("file01.txt", std::ofstream::out | std::ofstream::trunc);
+        cout << "Los datos guardados han sido eliminados" << endl;
+        archivoLista.close();
+    }
+    else
+    {
+        cout<<"Regresando al menu principal...\n";
+    }
 }
 #endif
