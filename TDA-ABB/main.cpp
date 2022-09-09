@@ -23,7 +23,7 @@ void menu()
     {
         cout << "0) Salir" << endl;
         cout << "1) Insertar elemento" << endl;
-        cout << "2) " << endl;
+        cout << "2) Eliminar" << endl;
         cout << "3) Mostrar en preorden" << endl;
         cout << "4) Mostrar en orden" << endl;
         cout << "5) Mostrar en postorden" << endl;
@@ -34,7 +34,12 @@ void menu()
         case 1:
             cout << "Cual dato quieres ingresar?\n";
             cin >> auxInt;
-            Arbolote.insertar(Arbolote.raiz, auxInt);
+            Arbolote.insertar(Arbolote.raiz, auxInt, nullptr);
+            break;
+        case 2:
+            cout << "Cual dato quieres eliminar?\n";
+            cin >> auxInt;
+            Arbolote.eliminar(Arbolote.raiz, auxInt);
             break;
         case 3:
             Arbolote.preorden(Arbolote.raiz);

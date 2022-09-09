@@ -13,13 +13,15 @@ class arbol
 public:
     arbol();
     Nodo *raiz;
-    void insertar(Nodo*&, int);
-    void preorden(Nodo*);
-    void orden(Nodo*);
-    void postorden(Nodo*);
+    void insertar(Nodo *&, int, Nodo *);
+    void eliminar(Nodo *, int);
+    void eliminarNodo(Nodo *);
+    Nodo minimo(Nodo*);
+    void preorden(Nodo *);
+    void orden(Nodo *);
+    void postorden(Nodo *);
 
 private:
-
 };
 
 arbol::arbol()
@@ -27,27 +29,27 @@ arbol::arbol()
     raiz = nullptr;
 }
 
-void arbol::insertar(Nodo *&raiz, int e)
+void arbol::insertar(Nodo *&raiz, int e, Nodo *padre)
 {
     if (!raiz)
     {
-        Nodo *nuevo_nodo = new Nodo(e);
+        Nodo *nuevo_nodo = new Nodo(e, padre);
         raiz = nuevo_nodo;
     }
-    else{
+    else
+    {
         if (e < raiz->dato)
         {
-            insertar(raiz->izq, e);
+            insertar(raiz->izq, e, raiz);
         }
         else
         {
-            insertar(raiz->der, e);
+            insertar(raiz->der, e, raiz);
         }
     }
 }
 
-
-void arbol::preorden(Nodo* raiz)
+void arbol::preorden(Nodo *raiz)
 {
     if (raiz)
     {
@@ -57,7 +59,7 @@ void arbol::preorden(Nodo* raiz)
     }
 }
 
-void arbol::orden(Nodo* raiz)
+void arbol::orden(Nodo *raiz)
 {
     if (raiz)
     {
@@ -67,15 +69,38 @@ void arbol::orden(Nodo* raiz)
     }
 }
 
-void arbol::postorden(Nodo* raiz)
+void arbol::postorden(Nodo *raiz)
 {
     if (raiz)
     {
         postorden(raiz->izq);
         postorden(raiz->der);
         cout << raiz->dato << " - ";
-    }   
+    }
 }
 
+void arbol::eliminar(Nodo *raiz, int e)
+{
+    if (raiz)
+    {
+        if (e < raiz->dato)
+        {
+            eliminar(raiz->izq, e);
+        }
+        else if (e > raiz->dato)
+        {
+            eliminar(raiz->der, e);
+        }
+        else //Encontró el nodo
+        {
+            eliminarNodo(raiz);
+        }
+    }
+}
+
+void arbol::eliminarNodo(Nodo *nodoEliminar)
+{
+    
+}
 
 #endif

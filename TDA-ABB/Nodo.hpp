@@ -10,7 +10,8 @@ class Nodo
 {
 public:
     Nodo();
-    Nodo(int);
+    Nodo(int, Nodo*);
+    Nodo *padre;
     Nodo *izq;
     Nodo *der;
     int dato;
@@ -21,11 +22,13 @@ Nodo::Nodo()
 {
     izq = nullptr;
     der = nullptr;
+    padre = nullptr;
 }
 
-Nodo::Nodo(int e)
+Nodo::Nodo(int e, Nodo* pdre)
 {
     dato = e;
+    padre = pdre;
     izq = nullptr;
     der = nullptr;
 }
