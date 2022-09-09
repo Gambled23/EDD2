@@ -1,1 +1,1 @@
-Noe|7|1*Pedro|5|0*Pablo|1|1*Ricardo|2|0*Massimo|3|1*Maria|4|1*Pepe|6|0*
+hector|13|1*Angel|11|1*Luz|10|1*Noe|7|1*Pedro|5|0*Pablo|1|1*Ricardo|2|0*Massimo|3|1*Maria|4|1*Pepe|6|0*pedrin|8|0*Tania|9|0*Erick|12|1*kevin|14|1*
