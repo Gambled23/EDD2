@@ -16,7 +16,9 @@ public:
     void insertar(Nodo *&, int, Nodo *);
     void eliminar(Nodo *, int);
     void eliminarNodo(Nodo *);
-    Nodo minimo(Nodo*);
+    Nodo *minimo(Nodo*);
+    void reemplazar(Nodo*, Nodo*);
+    void destruirNodo(Nodo*);
     void preorden(Nodo *);
     void orden(Nodo *);
     void postorden(Nodo *);
@@ -100,7 +102,69 @@ void arbol::eliminar(Nodo *raiz, int e)
 
 void arbol::eliminarNodo(Nodo *nodoEliminar)
 {
+    if (nodoEliminar->izq and nodoEliminar->der) //Dos hijos
+    {
+        Nodo *menor = minimo(nodoEliminar->der); //Mayor de los menores
+        nodoEliminar->dato = menor->dato; //Reemplazar el nodo a eliminar
+        eliminarNodo(menor);
+    }
+    else if (nodoEliminar->izq) //Un hijo izq
+    {
+        reemplazar(nodoEliminar, nodoEliminar->izq);
+        destruirNodo(nodoEliminar);
+    }
+    else if (nodoEliminar->der) //Un hijo der
+    {
+        reemplazar(nodoEliminar, nodoEliminar->der);
+        destruirNodo(nodoEliminar);
+    }
+    else //Sin hijos
+    {
+        reemplazar(nodoEliminar, nullptr);
+        destruirNodo(nodoEliminar);
+    }
+}
+
+Nodo *arbol::minimo(Nodo *raiz)
+{
+    if (raiz)
+    {
+        if (raiz->izq)
+        {
+            return minimo(raiz->izq);
+        }else
+        {
+            return raiz;
+        }
+        
+    }
+}
+
+
+void arbol::reemplazar(Nodo* raiz, Nodo* nuevoNodo)
+{
+    if (raiz->padre) //Asignar nuevo padre
+    {
+        if (raiz->dato == raiz->padre->izq->dato)
+        {
+            raiz->padre->izq = nuevoNodo;
+        }
+        else if (raiz->dato == raiz->padre->der->dato)
+        {
+            raiz->padre->der = nuevoNodo;
+        }
+    }
+    if (nuevoNodo) //Asignar nuevo hijo
+    {
+        nuevoNodo->padre = raiz->padre;
+    }
     
 }
 
+void arbol::destruirNodo(Nodo* nodoDestruir)
+{
+    nodoDestruir->izq = nullptr;
+    nodoDestruir->der = nullptr;
+    delete nodoDestruir;
+}
 #endif
