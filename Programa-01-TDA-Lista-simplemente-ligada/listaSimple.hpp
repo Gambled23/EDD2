@@ -195,6 +195,12 @@ void listaSimple::eliminarLista()
 
 void listaSimple::guardarDatos()
 {
+    if (!h)
+    {
+        cout<<"No es posible guardar una lista vacia\n";
+        return;
+    }
+    
     nodo *actual = new nodo();
     actual = h;
     ofstream archivoLista;
