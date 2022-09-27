@@ -2,6 +2,7 @@
 #define NODO_H
 #include <iostream>
 #include <cstdlib>
+#include "alumno.hpp"
 #pragma once
 
 using namespace std;
@@ -10,12 +11,11 @@ class Nodo
 {
 public:
     Nodo();
-    Nodo(int, Nodo*);
+    Nodo(alumno, Nodo*);
     Nodo *padre;
     Nodo *izq;
     Nodo *der;
-    int dato;
-
+    alumno dato;
 };
 
 Nodo::Nodo()
@@ -25,7 +25,7 @@ Nodo::Nodo()
     padre = nullptr;
 }
 
-Nodo::Nodo(int e, Nodo* pdre)
+Nodo::Nodo(alumno e, Nodo* pdre)
 {
     dato = e;
     padre = pdre;
