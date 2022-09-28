@@ -129,7 +129,7 @@ void arbol::eliminarNodo(Nodo *nodoEliminar)
 {
     if (nodoEliminar->izq and nodoEliminar->der) // Dos hijos
     {
-        Nodo *menor = minimo(nodoEliminar->der); // Mayor de los menores
+        Nodo *menor = minimo(nodoEliminar->der); // menor de mayores
         nodoEliminar->dato = menor->dato;        // Reemplazar el nodo a eliminar
         eliminarNodo(menor);
     }
