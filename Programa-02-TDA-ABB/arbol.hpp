@@ -27,6 +27,7 @@ public:
     void guardar();
     void preordenGuardar(Nodo *);
     void cargar();
+    void buscar(Nodo *, int);
     void eliminarArbol();
 
 private:
@@ -307,5 +308,27 @@ void arbol::eliminarArbol()
     }
     delete (raiz);
     raiz = nullptr;
+}
+void arbol::buscar(Nodo *raiz, int num)
+{
+    if (raiz)
+    {
+        if (raiz->dato.getCalificacion() == num) // Lo encontro
+        {
+            cout << "-----------------------------------\n";
+            cout << "Nombre: " << raiz->dato.getNombre() << "\n";
+            cout << "Calificacion: " << raiz->dato.getCalificacion() << "\n";
+            cout << "Semestre: " << raiz->dato.getSemestre() << "\n";
+            cout << "-----------------------------------\n";
+        }
+        if (num < raiz->dato.getCalificacion()) // Es menor
+        {
+            buscar(raiz->izq, num);
+        }
+        else // Es mayor
+        {
+            buscar(raiz->der, num);
+        }
+    }
 }
 #endif

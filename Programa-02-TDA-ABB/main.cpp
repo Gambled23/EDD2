@@ -41,6 +41,7 @@ void menu()
         cout << "6) Guardar datos" << endl;
         cout << "7) Cargar datos" << endl;
         cout << "8) Eliminar arbol completo" << endl;
+        cout << "9) Buscar" << endl;
         cin >> opc;
         switch (opc)
         {
@@ -79,6 +80,11 @@ void menu()
             break;
         case 8:
             Arbolote.eliminarArbol();
+            break;
+        case 9:
+            cout << "Cual calificacion quieres buscar?\n";
+            cin >> auxInt;
+            Arbolote.buscar(Arbolote.raiz, auxInt);
             break;
         default:
             break;
