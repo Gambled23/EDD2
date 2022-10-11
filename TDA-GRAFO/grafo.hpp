@@ -16,7 +16,7 @@ public:
     void insertarArista(int, int, int);
     nodoVertice *buscarVertice(int);
     void eliminarVertice();
-    void eliminarArista();
+    void eliminarArista(int, int);
     void mostrarConexiones();
 
 private:
@@ -68,16 +68,16 @@ void grafo::insertarArista(int orig, int desti, int e)
         if (!tmpArista)
         {
             nodoVertice *dest = buscarVertice(desti); // Busca el destino
-            if (dest) //Si encontro el destino
+            if (dest)                                 // Si encontro el destino
             {
-                //Insertar al inicio
+                // Insertar al inicio
                 nodoArista *aux = new nodoArista(e, dest, nullptr);
                 aux->sigArista = tmpVertice->hArista;
                 tmpVertice->hArista = aux;
             }
             else
             {
-                cout<<"No se encontro el destino\n";
+                cout << "No se encontro el destino\n";
             }
         }
     }
@@ -90,7 +90,7 @@ nodoVertice *grafo::buscarVertice(int e)
 {
     nodoVertice *tmp = hGrafo;
     bool bandera = true;
-    while (bandera) // Recorrer lista de vtc
+    while (bandera and tmp) // Recorrer lista de vtc
     {
         if (tmp->dato == e)
         {
@@ -112,8 +112,46 @@ void grafo::eliminarVertice()
 {
 }
 
-void grafo::eliminarArista()
+void grafo::eliminarArista(int org, int dst)
 {
+    nodoVertice *tmpVertice = buscarVertice(org); // Busca origen
+    bool bandera = true;
+    if (tmpVertice)
+    {
+        nodoArista *tmpArista = tmpVertice->hArista;
+        nodoArista *antArista = tmpArista;
+        while (bandera and tmpArista)
+        {
+            if (tmpArista->destino->dato == dst) // Encontro el destino
+            {
+                bandera = false;
+            }
+            antArista = tmpArista;
+            tmpArista = tmpArista->sigArista; // Recorrer lista de aristas
+        }
+        // Eliminar arista
+        if (tmpArista)
+        {
+            if (tmpArista == tmpVertice->hArista) // Si es el 1er dato
+            {
+                tmpVertice->hArista = tmpVertice->hArista->sigArista;
+            }
+            else // Si es otro dato
+            {
+                antArista->sigArista = tmpArista->sigArista; // Aislar dato a eliminar
+            }
+            delete tmpArista;
+            cout << "La arista ha sido eliminada\n";
+        }
+        else
+        {
+            cout << "No se encontro el destino\n";
+        }
+    }
+    else
+    {
+        cout << "No se encontro el origen\n";
+    }
 }
 
 void grafo::mostrarConexiones()
@@ -122,15 +160,15 @@ void grafo::mostrarConexiones()
     nodoArista *tmpArista = nullptr;
     while (tmpVertice)
     {
-        tmpArista = tmpVertice->hArista; //Posicionarnos en 1er arista
-        cout<<"Vertice origen: " <<tmpVertice->dato<<"  ";
-        while (tmpArista) //Recorrer lista de aristas del vertice actual
+        tmpArista = tmpVertice->hArista; // Posicionarnos en 1er arista
+        cout << "Vertice origen: " << tmpVertice->dato << "  ";
+        while (tmpArista) // Recorrer lista de aristas del vertice actual
         {
-            cout<<" "<<tmpArista->destino->dato;
+            cout << " " << tmpArista->destino->dato;
             tmpArista = tmpArista->sigArista;
         }
-        cout<<endl;
-        tmpVertice = tmpVertice->sig; //Recorrer lista de vertices
-    } 
+        cout << endl;
+        tmpVertice = tmpVertice->sig; // Recorrer lista de vertices
+    }
 }
 #endif
