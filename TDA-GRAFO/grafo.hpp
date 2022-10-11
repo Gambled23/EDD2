@@ -110,6 +110,7 @@ nodoVertice *grafo::buscarVertice(int e)
 
 void grafo::eliminarVertice()
 {
+    
 }
 
 void grafo::eliminarArista(int org, int dst)
