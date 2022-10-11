@@ -15,7 +15,7 @@ public:
     void insertarVertice(int);
     void insertarArista(int, int, int);
     nodoVertice *buscarVertice(int);
-    void eliminarVertice();
+    void eliminarVertice(int);
     void eliminarArista(int, int);
     void mostrarConexiones();
 
@@ -108,9 +108,39 @@ nodoVertice *grafo::buscarVertice(int e)
     return nullptr;
 }
 
-void grafo::eliminarVertice()
+void grafo::eliminarVertice(int e)
 {
-    
+    nodoVertice *tmpVertice = buscarVertice(e); // Busca vertice
+    nodoVertice *antVertice = hGrafo;
+    nodoArista *tmpArista = tmpVertice->hArista;
+    if (tmpVertice)
+    {
+        if (tmpVertice->hArista) // Borrar todas las aristas
+        {
+            // Borrar primer elemento de lista aristas
+            tmpArista = tmpVertice->hArista;
+            tmpVertice->hArista = tmpVertice->hArista->sigArista;
+            delete tmpArista;
+        }
+        if (hGrafo == tmpVertice) // Si el vertice a eliminar es el 1er elemento
+        {
+            hGrafo = tmpVertice->sig;
+            delete tmpVertice;
+        }
+        else //Si es otro elemento
+        {
+            while (antVertice->sig != tmpVertice)
+            {
+                antVertice = antVertice->sig;
+            }
+            antVertice->sig = tmpVertice->sig; //Aislar nodo a eliminar
+            delete tmpVertice;
+        }
+    }
+    else
+    {
+        cout << "Vertice no encontrado\n";
+    }
 }
 
 void grafo::eliminarArista(int org, int dst)
