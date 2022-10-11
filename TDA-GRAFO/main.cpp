@@ -4,6 +4,7 @@
 #include "nodo.hpp"
 
 void menu();
+grafo grafitoBonito;
 
 using namespace std;
 int main()
@@ -15,64 +16,57 @@ int main()
 void menu()
 {
     int opc = 1;
-    alumno auxAlu;
-    int auxInt;
-    string auxString;
+    int auxInt, destino, origen;
+
     while (opc != 0)
     {
         cout << "0) Salir" << endl;
         cout << "1) Insertar vertice" << endl;
-        cout << "1) Insertar arsita" << endl;
-        cout << "2) Eliminar vertice" << endl;
-        cout << "2) Eliminar arista" << endl;
-        cout << "9) Buscar dato" << endl;
+        cout << "2) Insertar arsita" << endl;
+        cout << "3) Eliminar vertice" << endl;
+        cout << "4) Eliminar arista" << endl;
+        cout << "5) Buscar dato" << endl;
         cout << "6) Guardar datos" << endl;
         cout << "7) Cargar datos" << endl;
         cout << "8) Eliminar grafo completo" << endl;
-        
+        cout << "9) Mostrar lista de conexiones" << endl;
         cin >> opc;
         switch (opc)
         {
         case 1:
-            cout << "Ingrese nombre del alumno\n";
-            cin >> auxString;
-            auxAlu.setNombre(auxString);
-            cout << "Ingrese calificacion del alumno\n";
+            cout << "Ingresa vertice: ";
             cin >> auxInt;
-            auxAlu.setCalificacion(auxInt);
-            cout << "Ingrese semestre del alumno\n";
-            cin >> auxString;
-            auxAlu.setSemestre(auxString);
-            Arbolote.insertar(Arbolote.raiz, auxAlu, nullptr);
+            grafitoBonito.insertarVertice(auxInt);
             break;
         case 2:
-            cout << "Cual es la calificacion que quieres eliminar?\n";
+            cout << "Ingresa peso arista: ";
             cin >> auxInt;
-            auxAlu.setCalificacion(auxInt);
-            Arbolote.eliminar(Arbolote.raiz, auxAlu);
+            cout << "Ingresa origen arista: ";
+            cin >> origen;
+            cout << "Ingresa destino arista: ";
+            cin >> destino;
+            grafitoBonito.insertarArista(origen, destino, auxInt);
             break;
         case 3:
-            Arbolote.preorden(Arbolote.raiz);
+
             break;
         case 4:
-            Arbolote.orden(Arbolote.raiz);
+
             break;
         case 5:
-            Arbolote.postorden(Arbolote.raiz);
+
             break;
         case 6:
-            Arbolote.guardar();
+
             break;
         case 7:
-            Arbolote.cargar();
+
             break;
         case 8:
-            Arbolote.eliminarArbol();
+
             break;
         case 9:
-            cout << "Cual calificacion quieres buscar?\n";
-            cin >> auxInt;
-            Arbolote.buscar(Arbolote.raiz, auxInt);
+            grafitoBonito.mostrarConexiones();
             break;
         default:
             break;

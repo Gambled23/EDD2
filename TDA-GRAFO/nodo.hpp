@@ -5,16 +5,20 @@
 #pragma once
 
 using namespace std;
-
+class nodoArista;
 class nodoVertice
 {
 public:
     nodoVertice();
-
-private:
     int dato;
     nodoVertice *sig;
     nodoArista *hArista;
+    nodoVertice(int e, nodoArista *arista, nodoVertice *vertice)
+    {
+        dato = e;
+        sig = vertice;
+        hArista = arista;
+    }
 };
 
 nodoVertice::nodoVertice()
@@ -28,17 +32,21 @@ class nodoArista
 {
 public:
     nodoArista();
-
-private:
     int peso;
-    nodoArista *sig;
+    nodoArista *sigArista;
     nodoVertice *destino;
+    nodoArista(int e, nodoVertice *dest, nodoArista *sig)
+    {
+        peso = e;
+        sigArista = sig;
+        destino = dest;
+    }
 };
 
 nodoArista::nodoArista()
 {
     peso = 0;
-    sig = nullptr;
+    sigArista = nullptr;
     destino = nullptr;
 }
 

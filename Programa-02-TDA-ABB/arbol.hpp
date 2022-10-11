@@ -104,6 +104,7 @@ void arbol::eliminar(Nodo *raiz, alumno e)
 {
     if (raiz)
     {
+
         if (e.getCalificacion() < raiz->dato.getCalificacion())
         {
             eliminar(raiz->izq, e);
@@ -114,13 +115,25 @@ void arbol::eliminar(Nodo *raiz, alumno e)
         }
         else // Encontró el nodo
         {
-            eliminarNodo(raiz);
+            if (!raiz->padre)
+            {
+                delete (raiz);
+                raiz = nullptr;
+                cout<<"a";
+            }
+            else
+            {
+                eliminarNodo(raiz);
+            }
         }
-        if (e.getCalificacion() == raiz->dato.getCalificacion())
+        if (raiz)
         {
-            Nodo *menor = minimo(raiz->der); // Mayor de los menores
-            raiz->dato = menor->dato;        // Reemplazar el nodo a eliminar
-            eliminarNodo(menor);
+            if (e.getCalificacion() == raiz->dato.getCalificacion())
+            {
+                Nodo *menor = minimo(raiz->der); // Mayor de los menores
+                raiz->dato = menor->dato;        // Reemplazar el nodo a eliminar
+                eliminarNodo(menor);
+            }
         }
     }
 }
