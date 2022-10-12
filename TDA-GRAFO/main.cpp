@@ -3,6 +3,16 @@
 #include "grafo.hpp"
 #include "nodo.hpp"
 
+/*TODO:
+Mostrar grafo
+Guardar
+Cargar
+Pasar dato a objeto
+Pasar nodo a privado
+--buscar vertice
+buscar arista
+*/
+
 void menu();
 grafo grafitoBonito;
 
@@ -25,11 +35,12 @@ void menu()
         cout << "2) Insertar arsita" << endl;
         cout << "3) Eliminar vertice" << endl;
         cout << "4) Eliminar arista" << endl;
-        cout << "5) Buscar dato" << endl;
-        cout << "6) Guardar datos" << endl;
-        cout << "7) Cargar datos" << endl;
-        cout << "8) Eliminar grafo completo" << endl;
-        cout << "9) Mostrar lista de conexiones" << endl;
+        cout << "5) Buscar vertice" << endl;
+        cout << "6) Buscar arista" << endl;
+        cout << "7) Guardar datos" << endl;
+        cout << "8) Cargar datos" << endl;
+        cout << "9) Eliminar grafo completo" << endl;
+        cout << "10) Mostrar lista de conexiones" << endl;
         cin >> opc;
         switch (opc)
         {
@@ -48,13 +59,30 @@ void menu()
             grafitoBonito.insertarArista(origen, destino, auxInt);
             break;
         case 3:
-
+            cout << "Ingresa el vertice a eliminar: ";
+            cin >> auxInt;
+            grafitoBonito.eliminarVertice(auxInt);
             break;
         case 4:
-
+            cout << "Ingresa origen de arista a eliminar: ";
+            cin >> origen;
+            cout << "Ingresa destino de arista a eliminar: ";
+            cin >> destino;
+            grafitoBonito.eliminarArista(origen, destino);
             break;
         case 5:
-
+            cout<<"Ingresa el dato del vertice a buscar: ";
+            cin>>auxInt;
+            nodoVertice *auxVertice = grafitoBonito.buscarVertice(auxInt);
+            if (auxVertice)
+            {
+                cout<<"Dato: "<<auxVertice->dato<<endl;
+            }
+            else
+            {
+                cout<<"Dato no encontrado\n";
+            }
+            
             break;
         case 6:
 

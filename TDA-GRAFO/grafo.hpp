@@ -15,10 +15,10 @@ public:
     void insertarVertice(int);
     void insertarArista(int, int, int);
     nodoVertice *buscarVertice(int);
+    nodoArista *buscarArista(int, int);
     void eliminarVertice(int);
     void eliminarArista(int, int);
     void mostrarConexiones();
-
 private:
 };
 
@@ -202,4 +202,5 @@ void grafo::mostrarConexiones()
         tmpVertice = tmpVertice->sig; // Recorrer lista de vertices
     }
 }
+
 #endif
