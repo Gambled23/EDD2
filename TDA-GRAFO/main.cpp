@@ -85,7 +85,21 @@ void menu()
             
             break;
         case 6:
-
+            cout<<"Ingresa el origen de la arista a buscar: ";
+            cin>>origen;
+            cout<<"Ingresa el destino de la arista a buscar: ";
+            cin>>destino;
+            cout<<"Ingresa el peso de la arista a buscar: ";
+            cin>>auxInt;
+            nodoArista *auxArista = grafitoBonito.buscarArista(origen,destino,auxInt);
+            if (auxArista)
+            {
+                cout<<"La arista solicitada SI existe en el grafo\n";
+            }
+            else
+            {
+                cout<<"La arista solicitada NO existe en el grafo\m";
+            }
             break;
         case 7:
 
