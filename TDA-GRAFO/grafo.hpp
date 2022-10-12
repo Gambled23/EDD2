@@ -15,10 +15,11 @@ public:
     void insertarVertice(int);
     void insertarArista(int, int, int);
     nodoVertice *buscarVertice(int);
-    nodoArista *buscarArista(int, int);
+    nodoArista *buscarArista(int, int, int);
     void eliminarVertice(int);
     void eliminarArista(int, int);
     void mostrarConexiones();
+
 private:
 };
 
@@ -108,6 +109,53 @@ nodoVertice *grafo::buscarVertice(int e)
     return nullptr;
 }
 
+nodoArista *grafo::buscarArista(int org, int dst, int pso)
+{
+    nodoVertice *origen = buscarVertice(org);
+    nodoArista *auxArista = nullptr;
+    bool bandera = true;
+    if (origen) // Encontro el origen
+    {
+        auxArista = origen->hArista;
+        if (auxArista)
+        {
+            while (auxArista->sigArista and bandera)
+            {
+                if (auxArista->destino->dato == dst) // Encontro el destino
+                {
+                    if (auxArista->peso == pso) // Encontro los 3 datos
+                    {
+                        bandera = false;
+                    }
+                    else
+                    {
+                        auxArista = auxArista->sigArista;
+                    }
+                }
+                else
+                {
+                    auxArista = auxArista->sigArista;
+                }
+            }
+            if (auxArista)
+            {
+                return auxArista;
+            }
+            else
+            {
+                return nullptr;
+            }
+        }
+        else
+        {
+            return nullptr;
+        }
+    }
+    else
+    {
+        return nullptr;
+    }
+}
 void grafo::eliminarVertice(int e)
 {
     nodoVertice *tmpVertice = buscarVertice(e); // Busca vertice
@@ -127,13 +175,13 @@ void grafo::eliminarVertice(int e)
             hGrafo = tmpVertice->sig;
             delete tmpVertice;
         }
-        else //Si es otro elemento
+        else // Si es otro elemento
         {
             while (antVertice->sig != tmpVertice)
             {
                 antVertice = antVertice->sig;
             }
-            antVertice->sig = tmpVertice->sig; //Aislar nodo a eliminar
+            antVertice->sig = tmpVertice->sig; // Aislar nodo a eliminar
             delete tmpVertice;
         }
     }
