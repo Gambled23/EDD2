@@ -48,38 +48,27 @@ void grafo::insertarVertice(int e)
 
 void grafo::insertarArista(int orig, int desti, int e)
 {
-    nodoVertice *tmpVertice = hGrafo;
-    nodoArista *tmpArista = nullptr;
+    nodoVertice *orgVtc = buscarVertice(orig);
+    nodoVertice *destVtc = buscarVertice(desti); // Busca el destino
     bool bandera = true;
-    while (tmpVertice and bandera)
+    if (orgVtc) // Si existe el origen
     {
-        if (tmpVertice->dato == orig) // Si encuentra el dato
+        if (destVtc) //Si existe el destino
         {
-            bandera = false;
+            nodoArista *aristaInsertar = new nodoArista(e, destVtc, nullptr); //Crear nodo arista
+            if (!orgVtc->hArista) //Si no hay aristas
+            {
+                orgVtc->hArista = aristaInsertar;
+            }
+            else //Si ya hay aristas insertar al inicio
+            {
+                aristaInsertar->sigArista = orgVtc->hArista;
+                orgVtc->hArista = aristaInsertar;
+            }
         }
         else
         {
-            tmpVertice = tmpVertice->sig; // Recorrer lista vtc para encontrar origen
-        }
-    }
-    if (tmpVertice) // Si existe el origen
-    {
-        // Lista de aristas
-        tmpArista = tmpVertice->hArista;
-        if (!tmpArista)
-        {
-            nodoVertice *dest = buscarVertice(desti); // Busca el destino
-            if (dest)                                 // Si encontro el destino
-            {
-                // Insertar al inicio
-                nodoArista *aux = new nodoArista(e, dest, nullptr);
-                aux->sigArista = tmpVertice->hArista;
-                tmpVertice->hArista = aux;
-            }
-            else
-            {
-                cout << "No se encontro el destino\n";
-            }
+            cout<<"Destino no encontrado\n";
         }
     }
     else
@@ -87,6 +76,7 @@ void grafo::insertarArista(int orig, int desti, int e)
         cout << "Origen no encontrado\n";
     }
 }
+
 nodoVertice *grafo::buscarVertice(int e)
 {
     nodoVertice *tmp = hGrafo;
@@ -239,15 +229,17 @@ void grafo::mostrarConexiones()
     nodoArista *tmpArista = nullptr;
     while (tmpVertice)
     {
-        tmpArista = tmpVertice->hArista; // Posicionarnos en 1er arista
-        cout << "Vertice origen: " << tmpVertice->dato << "  ";
-        while (tmpArista) // Recorrer lista de aristas del vertice actual
+        tmpArista = tmpVertice->hArista;
+        cout<<"--------------------\n";
+        cout<<"Vertice: "<<tmpVertice->dato<<endl;
+        cout<<"Aristas: ";
+        while (tmpArista)
         {
-            cout << " " << tmpArista->destino->dato;
+            cout<<tmpArista->destino->dato<<" ("<<tmpArista->peso<<"), ";
             tmpArista = tmpArista->sigArista;
         }
-        cout << endl;
-        tmpVertice = tmpVertice->sig; // Recorrer lista de vertices
+        cout<<"\n--------------------\n\n";
+        tmpVertice = tmpVertice->sig;
     }
 }
 

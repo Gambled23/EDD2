@@ -71,43 +71,42 @@ void menu()
             grafitoBonito.eliminarArista(origen, destino);
             break;
         case 5:
-            cout<<"Ingresa el dato del vertice a buscar: ";
-            cin>>auxInt;
+        {
+            cout << "Ingresa el dato del vertice a buscar: ";
+            cin >> auxInt;
             nodoVertice *auxVertice = grafitoBonito.buscarVertice(auxInt);
             if (auxVertice)
             {
-                cout<<"Dato: "<<auxVertice->dato<<endl;
+                cout << "Dato: " << auxVertice->dato << endl;
             }
             else
             {
-                cout<<"Dato no encontrado\n";
+                cout << "Dato no encontrado\n";
             }
-            
-            break;
+        }
+        break;
         case 6:
-            cout<<"Ingresa el origen de la arista a buscar: ";
-            cin>>origen;
-            cout<<"Ingresa el destino de la arista a buscar: ";
-            cin>>destino;
-            cout<<"Ingresa el peso de la arista a buscar: ";
-            cin>>auxInt;
-            nodoArista *auxArista = grafitoBonito.buscarArista(origen,destino,auxInt);
+        {
+            cout << "Ingresa el origen de la arista a buscar: ";
+            cin >> origen;
+            cout << "Ingresa el destino de la arista a buscar: ";
+            cin >> destino;
+            cout << "Ingresa el peso de la arista a buscar: ";
+            cin >> auxInt;
+            nodoArista *auxArista = grafitoBonito.buscarArista(origen, destino, auxInt);
             if (auxArista)
             {
-                cout<<"La arista solicitada SI existe en el grafo\n";
+                cout << "La arista solicitada SI existe en el grafo\n";
+                cout << auxArista->peso;
             }
             else
             {
-                cout<<"La arista solicitada NO existe en el grafo\m";
+                cout << "La arista solicitada NO existe en el grafo\n";
             }
-            break;
-        case 7:
+        }
+        break;
 
-            break;
-        case 8:
-
-            break;
-        case 9:
+        case 10:
             grafitoBonito.mostrarConexiones();
             break;
         default:
