@@ -91,13 +91,10 @@ void menu()
             cin >> origen;
             cout << "Ingresa el destino de la arista a buscar: ";
             cin >> destino;
-            cout << "Ingresa el peso de la arista a buscar: ";
-            cin >> auxInt;
-            nodoArista *auxArista = grafitoBonito.buscarArista(origen, destino, auxInt);
+            nodoArista *auxArista = grafitoBonito.buscarArista(origen, destino);
             if (auxArista)
             {
-                cout << "La arista solicitada SI existe en el grafo\n";
-                cout << auxArista->peso;
+                cout << "La arista solicitada tiene un peso de: "<<auxArista->peso<<endl;
             }
             else
             {
@@ -109,6 +106,24 @@ void menu()
         case 10:
             grafitoBonito.mostrarConexiones();
             break;
+        case 69:
+        grafitoBonito.insertarVertice(1);
+        grafitoBonito.insertarVertice(2);
+        grafitoBonito.insertarVertice(3);
+        grafitoBonito.insertarVertice(4);
+        grafitoBonito.insertarVertice(5);
+        grafitoBonito.insertarVertice(6);
+        grafitoBonito.insertarArista(1,4,61);
+        grafitoBonito.insertarArista(2,2,62);
+        grafitoBonito.insertarArista(3,4,63);
+        grafitoBonito.insertarArista(4,3,64);
+        grafitoBonito.insertarArista(5,6,65);
+        grafitoBonito.insertarArista(6,5,66);
+        grafitoBonito.insertarArista(3,4,67);
+        grafitoBonito.insertarArista(2,1,68);
+        grafitoBonito.insertarArista(2,4,69);
+
+        break;
         default:
             break;
         }

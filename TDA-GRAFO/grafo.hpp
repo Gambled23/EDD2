@@ -15,7 +15,7 @@ public:
     void insertarVertice(int);
     void insertarArista(int, int, int);
     nodoVertice *buscarVertice(int);
-    nodoArista *buscarArista(int, int, int);
+    nodoArista *buscarArista(int, int);
     void eliminarVertice(int);
     void eliminarArista(int, int);
     void mostrarConexiones();
@@ -53,14 +53,14 @@ void grafo::insertarArista(int orig, int desti, int e)
     bool bandera = true;
     if (orgVtc) // Si existe el origen
     {
-        if (destVtc) //Si existe el destino
+        if (destVtc) // Si existe el destino
         {
-            nodoArista *aristaInsertar = new nodoArista(e, destVtc, nullptr); //Crear nodo arista
-            if (!orgVtc->hArista) //Si no hay aristas
+            nodoArista *aristaInsertar = new nodoArista(e, destVtc, nullptr); // Crear nodo arista
+            if (!orgVtc->hArista)                                             // Si no hay aristas
             {
                 orgVtc->hArista = aristaInsertar;
             }
-            else //Si ya hay aristas insertar al inicio
+            else // Si ya hay aristas insertar al inicio
             {
                 aristaInsertar->sigArista = orgVtc->hArista;
                 orgVtc->hArista = aristaInsertar;
@@ -68,7 +68,7 @@ void grafo::insertarArista(int orig, int desti, int e)
         }
         else
         {
-            cout<<"Destino no encontrado\n";
+            cout << "Destino no encontrado\n";
         }
     }
     else
@@ -99,7 +99,7 @@ nodoVertice *grafo::buscarVertice(int e)
     return nullptr;
 }
 
-nodoArista *grafo::buscarArista(int org, int dst, int pso)
+nodoArista *grafo::buscarArista(int org, int dst)
 {
     nodoVertice *origen = buscarVertice(org);
     nodoArista *auxArista = nullptr;
@@ -113,14 +113,7 @@ nodoArista *grafo::buscarArista(int org, int dst, int pso)
             {
                 if (auxArista->destino->dato == dst) // Encontro el destino
                 {
-                    if (auxArista->peso == pso) // Encontro los 3 datos
-                    {
-                        bandera = false;
-                    }
-                    else
-                    {
-                        auxArista = auxArista->sigArista;
-                    }
+                    bandera = false;
                 }
                 else
                 {
@@ -230,15 +223,15 @@ void grafo::mostrarConexiones()
     while (tmpVertice)
     {
         tmpArista = tmpVertice->hArista;
-        cout<<"--------------------\n";
-        cout<<"Vertice: "<<tmpVertice->dato<<endl;
-        cout<<"Aristas: ";
+        cout << "--------------------\n";
+        cout << "Vertice: " << tmpVertice->dato << endl;
+        cout << "Aristas: ";
         while (tmpArista)
         {
-            cout<<tmpArista->destino->dato<<" ("<<tmpArista->peso<<"), ";
+            cout << tmpArista->destino->dato << " (" << tmpArista->peso << "), ";
             tmpArista = tmpArista->sigArista;
         }
-        cout<<"\n--------------------\n\n";
+        cout << "\n--------------------\n\n";
         tmpVertice = tmpVertice->sig;
     }
 }
