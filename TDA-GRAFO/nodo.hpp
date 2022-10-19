@@ -2,6 +2,7 @@
 #define NODO_H
 #include <iostream>
 #include <cstdlib>
+#include "alumno.hpp"
 #pragma once
 
 using namespace std;
@@ -10,10 +11,10 @@ class nodoVertice
 {
 public:
     nodoVertice();
-    int dato;
+    alumno dato;
     nodoVertice *sig;
     nodoArista *hArista;
-    nodoVertice(int e, nodoArista *arista, nodoVertice *vertice)
+    nodoVertice(alumno e, nodoArista *arista, nodoVertice *vertice)
     {
         dato = e;
         sig = vertice;
@@ -23,7 +24,6 @@ public:
 
 nodoVertice::nodoVertice()
 {
-    dato = 0;
     sig = nullptr;
     hArista = nullptr;
 }

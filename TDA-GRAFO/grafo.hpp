@@ -12,7 +12,7 @@ class grafo
 public:
     grafo();
     nodoVertice *hGrafo;
-    void insertarVertice(int);
+    void insertarVertice(alumno);
     void insertarArista(int, int, int);
     nodoVertice *buscarVertice(int);
     nodoArista *buscarArista(int, int);
@@ -28,7 +28,7 @@ grafo::grafo()
     hGrafo = nullptr;
 }
 
-void grafo::insertarVertice(int e)
+void grafo::insertarVertice(alumno e)
 {
     nodoVertice *aux = new nodoVertice(e, nullptr, nullptr);
     nodoVertice *tmp = hGrafo;

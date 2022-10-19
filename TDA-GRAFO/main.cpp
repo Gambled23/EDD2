@@ -2,6 +2,7 @@
 #include <cstdlib>
 #include "grafo.hpp"
 #include "nodo.hpp"
+#include "alumno.hpp"
 
 /*TODO:
 Mostrar grafo
@@ -10,11 +11,13 @@ Cargar
 Pasar dato a objeto
 Pasar nodo a privado
 --buscar vertice
-buscar arista
+--buscar arista
 */
 
 void menu();
 grafo grafitoBonito;
+alumno aluAux;
+int ID = 0;
 
 using namespace std;
 int main()
@@ -27,7 +30,7 @@ void menu()
 {
     int opc = 1;
     int auxInt, destino, origen;
-
+    string auxString;
     while (opc != 0)
     {
         cout << "0) Salir" << endl;
@@ -45,9 +48,16 @@ void menu()
         switch (opc)
         {
         case 1:
-            cout << "Ingresa vertice: ";
+            cout << "Ingresa nombre alumno: ";
+            cin >> auxString;
+            aluAux.setNombre(auxString);
+            cout << "Ingresa calificacion alumno: ";
             cin >> auxInt;
-            grafitoBonito.insertarVertice(auxInt);
+            aluAux.setCalificacion(auxInt);
+            aluAux.setId(ID);
+            grafitoBonito.insertarVertice(aluAux);
+            cout << "Se agregó con la ID " << ID << endl;
+            ID++;
             break;
         case 2:
             cout << "Ingresa peso arista: ";
@@ -59,7 +69,7 @@ void menu()
             grafitoBonito.insertarArista(origen, destino, auxInt);
             break;
         case 3:
-            cout << "Ingresa el vertice a eliminar: ";
+            cout << "Ingresa la ID del vertice a eliminar: ";
             cin >> auxInt;
             grafitoBonito.eliminarVertice(auxInt);
             break;
@@ -72,12 +82,14 @@ void menu()
             break;
         case 5:
         {
-            cout << "Ingresa el dato del vertice a buscar: ";
+            cout << "Ingresa el ID de la vertice a buscar: ";
             cin >> auxInt;
             nodoVertice *auxVertice = grafitoBonito.buscarVertice(auxInt);
             if (auxVertice)
             {
-                cout << "Dato: " << auxVertice->dato << endl;
+                cout << "ID: " << auxVertice->dato.getId() << endl;
+                cout << "Nombre: " << auxVertice->dato.getNombre() << endl;
+                cout << "Calificacion: " << auxVertice->dato.getCalificacion() << endl;
             }
             else
             {
@@ -94,7 +106,7 @@ void menu()
             nodoArista *auxArista = grafitoBonito.buscarArista(origen, destino);
             if (auxArista)
             {
-                cout << "La arista solicitada tiene un peso de: "<<auxArista->peso<<endl;
+                cout << "La arista solicitada tiene un peso de: " << auxArista->peso << endl;
             }
             else
             {
@@ -106,25 +118,8 @@ void menu()
         case 10:
             grafitoBonito.mostrarConexiones();
             break;
-        case 69:
-        grafitoBonito.insertarVertice(1);
-        grafitoBonito.insertarVertice(2);
-        grafitoBonito.insertarVertice(3);
-        grafitoBonito.insertarVertice(4);
-        grafitoBonito.insertarVertice(5);
-        grafitoBonito.insertarVertice(6);
-        grafitoBonito.insertarArista(1,4,61);
-        grafitoBonito.insertarArista(2,2,62);
-        grafitoBonito.insertarArista(3,4,63);
-        grafitoBonito.insertarArista(4,3,64);
-        grafitoBonito.insertarArista(5,6,65);
-        grafitoBonito.insertarArista(6,5,66);
-        grafitoBonito.insertarArista(3,4,67);
-        grafitoBonito.insertarArista(2,1,68);
-        grafitoBonito.insertarArista(2,4,69);
-
-        break;
         default:
+            cout<<"Opcion invalida\n";
             break;
         }
         system("pause");
