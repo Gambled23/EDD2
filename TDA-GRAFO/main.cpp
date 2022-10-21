@@ -62,9 +62,9 @@ void menu()
         case 2:
             cout << "Ingresa peso arista: ";
             cin >> auxInt;
-            cout << "Ingresa origen arista: ";
+            cout << "Ingresa ID origen arista: ";
             cin >> origen;
-            cout << "Ingresa destino arista: ";
+            cout << "Ingresa ID destino arista: ";
             cin >> destino;
             grafitoBonito.insertarArista(origen, destino, auxInt);
             break;
@@ -74,9 +74,9 @@ void menu()
             grafitoBonito.eliminarVertice(auxInt);
             break;
         case 4:
-            cout << "Ingresa origen de arista a eliminar: ";
+            cout << "Ingresa ID origen de arista a eliminar: ";
             cin >> origen;
-            cout << "Ingresa destino de arista a eliminar: ";
+            cout << "Ingresa ID destino de arista a eliminar: ";
             cin >> destino;
             grafitoBonito.eliminarArista(origen, destino);
             break;
@@ -99,9 +99,9 @@ void menu()
         break;
         case 6:
         {
-            cout << "Ingresa el origen de la arista a buscar: ";
+            cout << "Ingresa el ID origen de la arista a buscar: ";
             cin >> origen;
-            cout << "Ingresa el destino de la arista a buscar: ";
+            cout << "Ingresa el ID destino de la arista a buscar: ";
             cin >> destino;
             nodoArista *auxArista = grafitoBonito.buscarArista(origen, destino);
             if (auxArista)
@@ -114,12 +114,14 @@ void menu()
             }
         }
         break;
-
         case 10:
             grafitoBonito.mostrarConexiones();
             break;
+        case 0:
+            cout << "Gracias por su preferencia\n";
+            break;
         default:
-            cout<<"Opcion invalida\n";
+            cout << "Opcion invalida\n";
             break;
         }
         system("pause");

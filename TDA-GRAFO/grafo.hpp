@@ -83,7 +83,7 @@ nodoVertice *grafo::buscarVertice(int e)
     bool bandera = true;
     while (bandera and tmp) // Recorrer lista de vtc
     {
-        if (tmp->dato == e)
+        if (tmp->dato.getId() == e)
         {
             bandera = false;
         }
@@ -111,7 +111,7 @@ nodoArista *grafo::buscarArista(int org, int dst)
         {
             while (auxArista->sigArista and bandera)
             {
-                if (auxArista->destino->dato == dst) // Encontro el destino
+                if (auxArista->destino->dato.getId() == dst) // Encontro el destino
                 {
                     bandera = false;
                 }
@@ -184,7 +184,7 @@ void grafo::eliminarArista(int org, int dst)
         nodoArista *antArista = tmpArista;
         while (bandera and tmpArista)
         {
-            if (tmpArista->destino->dato == dst) // Encontro el destino
+            if (tmpArista->destino->dato.getId() == dst) // Encontro el destino
             {
                 bandera = false;
             }
@@ -224,11 +224,13 @@ void grafo::mostrarConexiones()
     {
         tmpArista = tmpVertice->hArista;
         cout << "--------------------\n";
-        cout << "Vertice: " << tmpVertice->dato << endl;
-        cout << "Aristas: ";
+        cout << "Vertice id: " << tmpVertice->dato.getId() << endl;
+        cout << "Nombre: " << tmpVertice->dato.getNombre() << endl;
+        cout << "Calificacion: " << tmpVertice->dato.getCalificacion() << endl;
+        cout << "Lista de aristas\n";
         while (tmpArista)
         {
-            cout << tmpArista->destino->dato << " (" << tmpArista->peso << "), ";
+            cout <<"ID destino: "<< tmpArista->destino->dato.getId() << "\tPeso: " << tmpArista->peso << "\n";
             tmpArista = tmpArista->sigArista;
         }
         cout << "\n--------------------\n\n";
