@@ -5,13 +5,14 @@
 #include "alumno.hpp"
 
 /*TODO:
-Mostrar grafo
-Guardar
-Cargar
-Pasar dato a objeto
-Pasar nodo a privado
+--Mostrar grafo
+--Guardar
+--Cargar
+--Pasar dato a objeto
+--Pasar nodo a privado
 --buscar vertice
 --buscar arista
+Borrar grafo
 */
 
 void menu();
@@ -42,8 +43,9 @@ void menu()
         cout << "6) Buscar arista" << endl;
         cout << "7) Guardar datos" << endl;
         cout << "8) Cargar datos" << endl;
-        cout << "9) Eliminar grafo completo" << endl;
+        cout << "9) Eliminar datos guardados" << endl;
         cout << "10) Mostrar lista de conexiones" << endl;
+        cout << "11) Eliminar datos locales"<<endl;
         cin >> opc;
         switch (opc)
         {
@@ -114,11 +116,45 @@ void menu()
             }
         }
         break;
+        case 7:
+            grafitoBonito.guardarDatos();
+            break;
+        case 8:
+            ID = grafitoBonito.cargarDatos();
+            break;
         case 10:
             grafitoBonito.mostrarConexiones();
             break;
         case 0:
             cout << "Gracias por su preferencia\n";
+            break;
+        case 69:
+            aluAux.setId(1);
+            aluAux.setNombre("pablo");
+            aluAux.setCalificacion(98);
+            grafitoBonito.insertarVertice(aluAux);
+            aluAux.setId(2);
+            aluAux.setNombre("cesar");
+            aluAux.setCalificacion(96);
+            grafitoBonito.insertarVertice(aluAux);
+            aluAux.setId(3);
+            aluAux.setNombre("alan");
+            aluAux.setCalificacion(89);
+            grafitoBonito.insertarVertice(aluAux);
+            aluAux.setId(4);
+            aluAux.setNombre("elias");
+            aluAux.setCalificacion(74);
+            grafitoBonito.insertarVertice(aluAux);
+            aluAux.setId(5);
+            aluAux.setNombre("massimo");
+            aluAux.setCalificacion(82);
+            grafitoBonito.insertarVertice(aluAux);
+            grafitoBonito.insertarArista(1,2,51);
+            grafitoBonito.insertarArista(1,3,51);
+            grafitoBonito.insertarArista(1,4,51);
+            grafitoBonito.insertarArista(3,5,51);
+            grafitoBonito.insertarArista(5,3,51);
+            grafitoBonito.insertarArista(2,1,51);
             break;
         default:
             cout << "Opcion invalida\n";

@@ -2,6 +2,8 @@
 #define GRAFO_H
 #include <iostream>
 #include <cstdlib>
+#include <fstream>
+#include <sstream>
 #pragma once
 #include "nodo.hpp"
 
@@ -19,6 +21,9 @@ public:
     void eliminarVertice(int);
     void eliminarArista(int, int);
     void mostrarConexiones();
+    void guardarDatos();
+    int cargarDatos();
+    void eliminarDatos();
 
 private:
 };
@@ -230,12 +235,138 @@ void grafo::mostrarConexiones()
         cout << "Lista de aristas\n";
         while (tmpArista)
         {
-            cout <<"ID destino: "<< tmpArista->destino->dato.getId() << "\tPeso: " << tmpArista->peso << "\n";
+            cout << "ID destino: " << tmpArista->destino->dato.getId() << "\tPeso: " << tmpArista->peso << "\n";
             tmpArista = tmpArista->sigArista;
         }
         cout << "\n--------------------\n\n";
         tmpVertice = tmpVertice->sig;
     }
 }
+
+void grafo::guardarDatos()
+{
+    nodoVertice *vtcAux = hGrafo;
+    nodoArista *astAux;
+    if (vtcAux)
+    {
+        string cadena, registro, campo;
+        alumno aluAux;
+        ofstream archivoGrafo;
+        archivoGrafo.open("file01.txt", ios::out);
+        ofstream archivoAristas;
+        archivoAristas.open("file02.txt", ios::out);
+        if (archivoGrafo.fail() or archivoAristas.fail())
+        {
+            cout << "No se pudo abrir el archivo";
+            exit(1);
+        }
+        while (vtcAux)
+        {
+            archivoGrafo << vtcAux->dato.getId() << "|";
+            archivoGrafo << vtcAux->dato.getNombre() << "|";
+            archivoGrafo << vtcAux->dato.getCalificacion() << "*";
+            astAux = vtcAux->hArista;
+            while (astAux) // Guardar aristas
+            {
+                archivoAristas << vtcAux->dato.getId() << "|";
+                archivoAristas << astAux->destino->dato.getId() << "|";
+                archivoAristas << astAux->peso << "*";
+                astAux = astAux->sigArista;
+            }
+            vtcAux = vtcAux->sig;
+        }
+        archivoGrafo.close();
+        archivoAristas.close();
+        cout << "Los datos han sido guardados\n";
+    }
+    else
+    {
+        cout << "No se puede guardar un grafo vacio\n";
+    }
+}
+
+int grafo::cargarDatos()
+{
+    string cadena, registro, campo;
+    int aux = 1, idTemp;
+    alumno aluAux;
+    ifstream archivoGrafo;
+
+    // Cargar vertices
+    archivoGrafo.open("file01.txt", ios::in);
+    if (archivoGrafo.fail())
+    {
+        cout << "No se pudo abrir el archivo\n";
+        exit(1);
+    }
+    while (!archivoGrafo.eof()) // Mientras no sea el end of file
+    {
+        getline(archivoGrafo, cadena);
+    }
+    stringstream cadenaStream(cadena);
+    while (getline(cadenaStream, registro, '*'))
+    {
+        aux = 1;
+        stringstream registroStream(registro);
+        while (getline(registroStream, campo, '|'))
+        {
+            switch (aux)
+            {
+            case 1:
+                aluAux.setId(stoi(campo));
+                idTemp = aluAux.getId() + 1;
+                break;
+            case 2:
+                aluAux.setNombre(campo);
+                break;
+            case 3:
+                aluAux.setCalificacion(stoi(campo));
+                break;
+            }
+            aux++;
+        }
+        insertarVertice(aluAux);
+    }
+    archivoGrafo.close();
+    // Cargar aristas
+    int origen, destino, peso;
+    archivoGrafo.open("file02.txt", ios::in);
+    if (archivoGrafo.fail())
+    {
+        cout << "No se pudo abrir el archivo\n";
+        exit(1);
+    }
+    while (!archivoGrafo.eof()) // Mientras no sea el end of file
+    {
+        getline(archivoGrafo, cadena);
+    }
+    stringstream cadenaStream2(cadena);
+    while (getline(cadenaStream2, registro, '*'))
+    {
+        aux = 1;
+        stringstream registroStream2(registro);
+        while (getline(registroStream2, campo, '|'))
+        {
+            switch (aux)
+            {
+            case 1:
+                origen = stoi(campo);
+                break;
+            case 2:
+                destino = stoi(campo);
+                break;
+            case 3:
+                peso = (stoi(campo));
+                break;
+            }
+            aux++;
+        }
+        insertarArista(origen,destino,peso);
+    }
+    archivoGrafo.close();
+    cout << "Los datos han sido cargados exitosamente" << endl;
+    return idTemp;
+}
+
 
 #endif
