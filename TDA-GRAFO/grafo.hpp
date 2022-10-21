@@ -24,7 +24,7 @@ public:
     void guardarDatos();
     int cargarDatos();
     void eliminarDatos();
-
+    void eliminarLocal();
 private:
 };
 
@@ -361,12 +361,53 @@ int grafo::cargarDatos()
             }
             aux++;
         }
-        insertarArista(origen,destino,peso);
+        insertarArista(origen, destino, peso);
     }
     archivoGrafo.close();
     cout << "Los datos han sido cargados exitosamente" << endl;
     return idTemp;
 }
 
+void grafo::eliminarDatos()
+{
+    int opc = 2;
+    cout << "Esta accion es irreversible y borrara todos los datos de respaldo, seguro que quieres continuar?\n";
+    cout << "   1)Si  2)No\n";
+    cin >> opc;
+    if (opc == 1)
+    {
+        ofstream archivoGrafo;
+        archivoGrafo.open("file01.txt", std::ofstream::out | std::ofstream::trunc);
+        archivoGrafo.close();
+        archivoGrafo.open("file02.txt", std::ofstream::out | std::ofstream::trunc);
+        archivoGrafo.close();
+        cout << "Los datos guardados han sido eliminados" << endl;
+    }
+    else
+    {
+        cout << "Regresando al menu principal...\n";
+    }
+}
 
+void grafo::eliminarLocal()
+{
+    nodoVertice *vtcAux = hGrafo;
+    nodoArista *astAux;
+    if (hGrafo)
+    {
+        while (hGrafo)
+        {
+            vtcAux = hGrafo;
+            while (vtcAux->hArista) //Borrar todas las aristas
+            {
+                astAux = vtcAux->hArista;
+                vtcAux->hArista = vtcAux->hArista->sigArista;
+                delete astAux;
+            }
+            hGrafo = hGrafo->sig;
+            delete vtcAux;
+        }
+    }
+    cout<<"Datos borrados\n";
+}
 #endif

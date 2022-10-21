@@ -18,7 +18,7 @@ Borrar grafo
 void menu();
 grafo grafitoBonito;
 alumno aluAux;
-int ID = 0;
+int ID = 1;
 
 using namespace std;
 int main()
@@ -122,8 +122,15 @@ void menu()
         case 8:
             ID = grafitoBonito.cargarDatos();
             break;
+        case 9:
+            grafitoBonito.eliminarDatos();
+            break;
         case 10:
             grafitoBonito.mostrarConexiones();
+            break;
+        case 11:
+            grafitoBonito.eliminarLocal();
+            ID = 1;
             break;
         case 0:
             cout << "Gracias por su preferencia\n";
