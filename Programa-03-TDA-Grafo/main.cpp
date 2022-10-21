@@ -12,7 +12,7 @@
 --Pasar nodo a privado
 --buscar vertice
 --buscar arista
-Borrar grafo
+**Borrar grafo
 */
 
 void menu();
