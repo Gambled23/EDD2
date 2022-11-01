@@ -1,10 +1,22 @@
 #include <iostream>
 #include <cstdlib>
-#include "animal.hpp"
+#include "persona.hpp"
+#include "indices.hpp"
 
+/*TODO
+Funcion hash
+Ver registros
+archivo de indices
+
+opcionales
+editar registro
+eliminar registro
+*/
 using namespace std;
 
 void menu();
+
+indices indiceAux;
 
 int main()
 {
@@ -14,8 +26,8 @@ int main()
 
 void menu()
 {
-    animal aniAux;
-    int opc = 1, auxInt;
+    persona personaAux;
+    int opc = 1;
     string auxString;
     while (opc != 0)
     {
@@ -25,25 +37,32 @@ void menu()
         cout << "3) Editar registro \n";
         cout << "4) Guardar datos\n";
         cout << "5) Cargar datos\n";
-        cout << "6) ";
         cin >> opc;
         switch (opc)
         {
         case 1:
-            cout<<"Ingresa el nombre del animal: ";
+        {
+            cout<<"Ingresa el nombre de la persona: ";
             cin>>auxString;
-            aniAux.setName(auxString);
-            cout<<"Ingresa la edad del animal: ";
-            cin>>auxInt;
-            aniAux.setAge(auxInt);
+            personaAux.setName(auxString);
+            cout<<"Ingresa la edad de la persona: ";
+            cin>>auxString;
+            personaAux.setAge(auxString);
+            cout<<"Ingresa el telefono de la persona (10 digitos): ";
+            cin>>auxString;
+            personaAux.setPhone(auxString);
+            string primaryKey = personaAux.generateKey(personaAux);
+            personaAux.setPrimaryKey(primaryKey);
+            indiceAux.addRecord(personaAux);
             break;
+        }
         case 2:
             cout<<"Ingresa la ID del animal a eliminar: ";
-            cin>>auxInt;
+            cin>>auxString;
             break;
         case 3:
             cout<<"Ingresa la ID del animal a editar: ";
-            cin>>auxInt;
+            cin>>auxString;
             break;
         case 4:
             /* code */
@@ -57,5 +76,6 @@ void menu()
         default:
             break;
         }
+        system("pause");
     }
 }
