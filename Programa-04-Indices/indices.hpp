@@ -51,16 +51,16 @@ void indices::addRecord(persona personaAux)
 
 void indices::writeIndex(persona personaAux)
 {
-    ofstream indexFile("indexLibrary.txt", ios::app);
-    if (!indexFile)
+    ofstream recordFile("indexLibrary.txt", ios::app);
+    if (!recordFile)
     {
         cout << "No se pudo abrir el archivo\n";
         system("pause");
         exit(EXIT_FAILURE);
     }
-    indexFile << personaAux.getPrimaryKey() << "|";
-    indexFile << personaAux.indice << "*";
-    indexFile.close();
+    recordFile << personaAux.getPrimaryKey() << "|";
+    recordFile << personaAux.indice << "*";
+    recordFile.close();
 }
 
 int indices::hash(string prmKey, string age)
@@ -80,19 +80,19 @@ int indices::hash(string prmKey, string age)
 
 int indices::searchIndex(string key)
 {
-    ifstream indexFile("indexLibrary.txt", ios::in);
+    ifstream recordFile("indexLibrary.txt", ios::in);
     string text, record, field;
     int aux = 1, index; // Index tiene la posicion en donde está el dato
     bool foundKey = false;
     // Buscar indice
-    if (indexFile.fail())
+    if (recordFile.fail())
     {
         cout << "No se pudo abrir el archivo\n";
         exit(1);
     }
-    while (!indexFile.eof()) // Mientras no sea el end of file
+    while (!recordFile.eof()) // Mientras no sea el end of file
     {
-        getline(indexFile, text);
+        getline(recordFile, text);
     }
     stringstream textStream(text);
     while (getline(textStream, record, '*'))
@@ -125,29 +125,67 @@ int indices::searchIndex(string key)
             aux++;
         }
     }
-    indexFile.close();
+    recordFile.close();
     return index;
 }
 
 void indices::searchRecord(string key)
 {
     int index = searchIndex(key); // Buscar la posicion del record en el archivo
-    
-}
-
-void indices::showRecords()
-{
-    ifstream indexFile("dataRecords.txt", ios::in);
+    ifstream recordFile("dataRecords.txt", ios::in);
     string textString, record, field;
     int aux = 1;
-    if (indexFile.fail())
+    if (recordFile.fail())
     {
         cout << "No se pudo abrir el archivo\n";
         exit(1);
     }
-    while (!indexFile.eof()) // Mientras no sea el end of file
+    recordFile.seekg(index, ios::beg);
+    char A[50];
+    recordFile.read(A, 50);
+    stringstream textStringStream(A);
+    while (getline(textStringStream, record, '*'))
     {
-        getline(indexFile, textString);
+        aux = 1;
+        stringstream recordStream(record);
+        while (getline(recordStream, field, '|'))
+        {
+            switch (aux)
+            {
+            case 1:
+                cout << "Codigo: " << field << endl;
+                break;
+            case 2: // Nombre
+                cout << "Nombre: " << field << endl;
+                break;
+            case 3: // Edad
+                cout << "Edad: " << field << endl;
+                break;
+            case 4: // Telefono
+                cout << "Telefono: " << field << endl;
+                break;
+            default:
+                break;
+            }
+            aux++;
+        }
+        recordFile.close();
+    }
+}
+
+void indices::showRecords()
+{
+    ifstream recordFile("dataRecords.txt", ios::in);
+    string textString, record, field;
+    int aux = 1;
+    if (recordFile.fail())
+    {
+        cout << "No se pudo abrir el archivo\n";
+        exit(1);
+    }
+    while (!recordFile.eof()) // Mientras no sea el end of file
+    {
+        getline(recordFile, textString);
     }
     stringstream textStringStream(textString);
     while (getline(textStringStream, record, '*'))
@@ -159,16 +197,17 @@ void indices::showRecords()
             switch (aux)
             {
             case 1:
-                cout<<"Codigo: "<<field<<endl;
+                cout << "Codigo: " << field << endl;
                 break;
-            case 2: //Nombre
-                cout<<"Nombre: "<<field<<endl;
+            case 2: // Nombre
+                cout << "Nombre: " << field << endl;
                 break;
-            case 3: //Edad
-                cout<<"Edad: "<<field<<endl;
+            case 3: // Edad
+                cout << "Edad: " << field << endl;
                 break;
-            case 4: //Telefono
-                cout<<"Telefono: "<<field<<endl<<endl;
+            case 4: // Telefono
+                cout << "Telefono: " << field << endl
+                     << endl;
                 break;
             default:
                 break;
@@ -176,7 +215,7 @@ void indices::showRecords()
             aux++;
         }
     }
-    indexFile.close();
+    recordFile.close();
 }
 
 #endif

@@ -6,8 +6,9 @@
 /*TODO
 //Funcion hash
 //Archivo de indices
-Ver registros
+//Ver registros
 Manejo de colisiones
+    Arreglar lo de recuperar el ultimo registro
 */
 using namespace std;
 
@@ -63,6 +64,8 @@ void menu()
         case 3:
             indiceAux.showRecords();
             break;
+        case 0:
+            cout << "Gracias por su preferencia\n";
         default:
             cout << "Opcion invalida\n";
             break;
