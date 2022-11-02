@@ -44,6 +44,6 @@ int indices::hash(string prmKey, string age)
     {
         sumatoria = sumatoria + static_cast<int>(prmKey[i]);
     }
-    return sumatoria * stoi(age);
+    return sumatoria;
 }
 #endif

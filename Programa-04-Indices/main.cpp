@@ -54,7 +54,7 @@ void menu()
             string primaryKey = personaAux.generateKey(personaAux);
             personaAux.setPrimaryKey(primaryKey);
             indiceAux.addRecord(personaAux);
-            int ruta = indiceAux.hash(personaAux.getPrimaryKey(), personaAux.getAge());
+            int ruta = indiceAux.hash(primaryKey, personaAux.getAge());
             cout<<ruta;
             break;
         }
