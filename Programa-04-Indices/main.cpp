@@ -8,7 +8,7 @@
 //Archivo de indices
 //Ver registros
 Manejo de colisiones
-    Arreglar lo de recuperar el ultimo registro
+Arreglar lo de recuperar el ultimo registro
 */
 using namespace std;
 
