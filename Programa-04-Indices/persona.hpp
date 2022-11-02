@@ -20,7 +20,7 @@ public:
     void setName(string nm) { name = nm; }
     void setAge(string ag) { age = ag; }
     void setPhone(string ph) { phone = ph; }
-
+    int indice;
 private:
     string primaryKey;
     string name;
@@ -40,18 +40,18 @@ persona::persona(string nm, string ag, string ph)
 
 string persona::generateKey(persona personaAux)
 {
-    //Obtiene una clave con las primeras 2 letras del nombre, los ultimos 2 digitos de telefono, y la edad
+    // Obtiene una clave con las primeras 2 letras del nombre, los ultimos 2 digitos de telefono, y la edad
     char auxChar = personaAux.name.at(0);
     string key(1, auxChar);
     auxChar = personaAux.name.at(1);
     string keyAux(1, auxChar);
-    key = key+keyAux;
+    key = key + keyAux;
     auxChar = personaAux.phone.at(8);
     string keyAux2(1, auxChar);
-    key = key+keyAux2;
+    key = key + keyAux2;
     auxChar = personaAux.phone.at(9);
     string keyAux3(1, auxChar);
-    key = key+keyAux3;
+    key = key + keyAux3;
     key = key + personaAux.age;
     return key;
 }

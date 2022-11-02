@@ -4,13 +4,9 @@
 #include "indices.hpp"
 
 /*TODO
-Funcion hash
+//Funcion hash
+//Archivo de indices
 Ver registros
-archivo de indices
-
-opcionales
-editar registro
-eliminar registro
 */
 using namespace std;
 
@@ -53,9 +49,11 @@ void menu()
             personaAux.setPhone(auxString);
             string primaryKey = personaAux.generateKey(personaAux);
             personaAux.setPrimaryKey(primaryKey);
+            personaAux.indice = indiceAux.hash(primaryKey, personaAux.getAge());
+            //Agregar a archivo de registros
             indiceAux.addRecord(personaAux);
-            int ruta = indiceAux.hash(primaryKey, personaAux.getAge());
-            cout<<ruta;
+            //Agregar a archivo de indices
+            indiceAux.writeIndex(personaAux);
             break;
         }
         case 2:
