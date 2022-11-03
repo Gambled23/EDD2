@@ -144,9 +144,9 @@ void indices::searchRecord(string key)
     char A[50];
     recordFile.read(A, 50);
     stringstream textStringStream(A);
+    aux = 1;
     while (getline(textStringStream, record, '*'))
     {
-        aux = 1;
         stringstream recordStream(record);
         while (getline(recordStream, field, '|'))
         {

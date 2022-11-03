@@ -7,8 +7,8 @@
 //Funcion hash
 //Archivo de indices
 //Ver registros
+//Arreglar lo de recuperar el ultimo registro
 Manejo de colisiones
-Arreglar lo de recuperar el ultimo registro
 */
 using namespace std;
 
