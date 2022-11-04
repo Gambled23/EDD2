@@ -8,7 +8,7 @@
 //Archivo de indices
 //Ver registros
 //Arreglar lo de recuperar el ultimo registro
-Manejo de colisiones
+Manejo de colisiones (mi hash no da colisiones yo confio)
 */
 using namespace std;
 

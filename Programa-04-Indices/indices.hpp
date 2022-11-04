@@ -3,8 +3,8 @@
 #include <iostream>
 #include <cstdlib>
 #include <fstream>
-#include <ctime>
 #include <sstream>
+#include <cmath>
 #include "persona.hpp"
 
 #pragma once
@@ -15,19 +15,32 @@ class indices
 {
 public:
     indices();
-    int hash();
+    int hash(string, string);
     void addRecord(persona);
     void writeIndex(persona);
     void searchRecord(string);
     void showRecords();
     int searchIndex(string);
-    int hash(string, string);
+    
 
 private:
 };
 
 indices::indices()
 {
+}
+
+int indices::hash(string prmKey, string age)
+{
+    // Hasheo basado en la sumatoria de el valor ascii de cada caracter * el segundo actual
+    int sumatoria = 0;
+    for (size_t i = 0; i < prmKey.size(); i++)
+    {
+        sumatoria = sumatoria + static_cast<int>(prmKey[i]);
+    }
+    sumatoria = (sumatoria / stoi(age));
+    sumatoria = pow(sumatoria, 3);
+    return sumatoria;
 }
 
 void indices::addRecord(persona personaAux)
@@ -61,21 +74,6 @@ void indices::writeIndex(persona personaAux)
     recordFile << personaAux.getPrimaryKey() << "|";
     recordFile << personaAux.indice << "*";
     recordFile.close();
-}
-
-int indices::hash(string prmKey, string age)
-{
-    // Hasheo basado en la sumatoria de el valor ascii de cada caracter * el segundo actual
-    time_t t = time(NULL);
-    tm *timePtr = localtime(&t);
-    int aux = timePtr->tm_sec;
-    int sumatoria = 0;
-    for (size_t i = 0; i < prmKey.size(); i++)
-    {
-        sumatoria = sumatoria + static_cast<int>(prmKey[i]);
-    }
-    sumatoria = (sumatoria / stoi(age)) * aux;
-    return sumatoria;
 }
 
 int indices::searchIndex(string key)
